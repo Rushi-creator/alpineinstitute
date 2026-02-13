@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alpine Institute – The Wings of Knowledge</title>
+  <meta name="description" content="Alpine Institute offers Foundation (1st–10th), 11th–12th coaching, and competitive exam prep for JEE, NEET, and MHT-CET." />
+  <style>
+    :root{
+      --primary:#1a3d6d;        /* Deep Alpine Blue */
+      --primary-600:#184066;    /* Hover */
+      --primary-700:#132d51;    /* Dark */
+      --text:#1d2433;
+      --muted:#5b667a;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --ring:rgba(26,61,109,.18);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;line-height:1.6;color:var(--text);background:var(--bg)}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin-inline:auto}
+
+    /* NAVBAR */
+    header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid #e8edf5}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--primary)}
+    .brand img{height:36px;width:auto}
+    .brand small{display:block;font-weight:600;color:#335b8e;margin-top:-6px}
+    .nav-links{display:flex;gap:20px}
+    .nav-links a{padding:8px 10px;border-radius:10px;color:#1d2a3a;font-weight:600}
+    .nav-links a.active,.nav-links a:hover{background:rgba(26,61,109,.08);color:var(--primary)}
+    .cta{padding:10px 14px;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;box-shadow:0 6px 18px var(--ring)}
+    .cta:hover{background:var(--primary-600)}
+
+    /* MOBILE NAV */
+    .hamburger{display:none;flex-direction:column;gap:4px;border:0;background:transparent}
+    .hamburger span{width:24px;height:2px;background:#1d2a3a;border-radius:2px}
+    @media (max-width:880px){
+      .nav-links{display:none;position:fixed;inset:64px 0 auto 0;background:#fff;border-top:1px solid #e8edf5;padding:16px;flex-direction:column}
+      .nav-links.show{display:flex}
+      .hamburger{display:flex}
+      .cta{display:none}
+    }
+
+    /* HERO */
+    .hero{background:linear-gradient(160deg,var(--primary) 0%,var(--primary-700) 60%), url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat; color:#fff}
+    .hero-inner{padding:96px 0 72px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+    .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 14px}
+    .hero p{color:#e7eef8;margin:0 0 24px}
+    .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);padding:8px 12px;border-radius:999px;margin-bottom:12px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:1px solid transparent}
+    .btn.primary{background:#fff;color:var(--primary)}
+    .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:14px;border-radius:14px;text-align:center}
+    .stat .num{font-size:22px;font-weight:800}
+    @media (max-width:880px){.hero-inner{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+
+    /* SECTION BASE */
+    section{padding:72px 0}
+    .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+    .sec-title{font-size:clamp(22px,3vw,32px);margin:0;color:var(--primary)}
+    .sec-sub{color:var(--muted)}
+
+    /* FEATURES */
+    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .feature{background:var(--card);padding:18px;border-radius:16px;box-shadow:0 8px 22px var(--ring);border:1px solid #e9eef6}
+    .feature h4{margin:8px 0 6px;color:#193b69}
+    @media (max-width:1000px){.features{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.features{grid-template-columns:1fr}}
+
+    /* COURSES */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 22px}
+    .tab{padding:10px 12px;border-radius:10px;border:1px solid #dbe3f0;background:#fff;color:#274466;font-weight:700;cursor:pointer}
+    .tab.active{background:var(--primary);color:#fff;border-color:transparent}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid #e9eef6;border-radius:16px;box-shadow:0 10px 24px var(--ring);overflow:hidden;display:flex;flex-direction:column}
+    .card .body{padding:16px}
+    .pill{display:inline-block;background:rgba(26,61,109,.08);color:var(--primary);padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:8px}
+    .card h3{margin:6px 0 8px}
+    .card p{color:var(--muted);margin:0 0 12px}
+    .card .footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-top:1px solid #eef2f8;background:#fafcff}
+    .enroll{padding:10px 12px;border-radius:10px;background:var(--primary);color:#fff;font-weight:700}
+    .enroll:hover{background:var(--primary-600)}
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+    /* FACULTY */
+    .faculty{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .mentor{background:var(--card);border:1px solid #e9eef6;border-radius:16px;box-shadow:0 10px 24px var(--ring);padding:16px;text-align:center}
+    .mentor img{width:84px;height:84px;border-radius:50%;object-fit:cover;margin-inline:auto;border:3px solid rgba(26,61,109,.2)}
+    .mentor h4{margin:10px 0 2px;color:#193b69}
+    .mentor span{color:var(--muted);font-weight:600}
+    @media (max-width:1000px){.faculty{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.faculty{grid-template-columns:1fr}}
+
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{border-radius:14px;height:180px;object-fit:cover}
+    @media (max-width:1000px){.gallery{grid-template-columns:repeat(2,1fr)}}
+
+    .gallery-slider {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      transition: max-height 0.4s;
+      max-height: 220px;
+    }
+    .gallery-slider:hover,
+    .gallery-slider:focus-within {
+      max-height: 400px;
+    }
+    .gallery-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.3s;
+      will-change: transform;
+    }
+    .gallery-track img {
+      height: 180px;
+      width: 260px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px var(--ring);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .gallery-track img:hover {
+      transform: scale(1.08);
+      z-index: 2;
+      box-shadow: 0 8px 32px var(--ring);
+    }
+    @media (max-width: 1000px) {
+      .gallery-track img {
+        height: 120px;
+        width: 180px;
+      }
+      .gallery-slider {
+        max-height: 140px;
+      }
+    }
+    @media (max-width: 600px) {
+      .gallery-track img {
+        height: 80px;
+        width: 120px;
+      }
+      .gallery-slider {
+        max-height: 90px;
+      }
+    }
+
+    .gallery-track img {
+      height: 260px;
+      width: 380px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px var(--ring);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    /* TESTIMONIALS */
+    .slider{position:relative}
+    .slide{background:var(--card);border:1px solid #e9eef6;border-radius:16px;box-shadow:0 10px 24px var(--ring);padding:18px;display:none}
+    .slide.active{display:block}
+    .quote{font-style:italic;color:#223a58}
+
+    /* CONTACT */
+    form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+    form .full{grid-column:1/-1}
+    label{font-weight:700;color:#223a58}
+    input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #dbe3f0;background:#fff}
+    textarea{min-height:110px}
+    .submit{justify-self:start;padding:12px 16px;border-radius:12px;background:var(--primary);color:#fff;border:0;font-weight:800}
+    .submit:hover{background:var(--primary-600)}
+
+    /* FOOTER */
+    footer{background:#0f2240;color:#cfe0ff}
+    .footer-inner{padding:24px 0;display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+    .footcol h5{margin:0 0 10px;color:#fff}
+    .footcol p{margin:6px 0}
+    .copyright{border-top:1px solid rgba(255,255,255,.15);padding:12px 0;color:#a7bcdf;text-align:center}
+    @media (max-width:880px){.footer-inner{grid-template-columns:1fr}}
+
+    /* UTILS */
+    .hidden{display:none}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  
+  <!-- NAVBAR -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Alpine Institute home">
+        <img src="alpine-logo.png" alt="Alpine Institute logo" />
+        <div>
+          <div></div>
+          <small></small>
+        </div>
+      </a>
+      <nav>
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#home" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#courses">Courses</a>
+          <a href="#faculty">Faculty</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#study-material">Study Material</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+      <a href="#contact" class="cta">Enquire Now</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home" role="banner">
+    <div class="container hero-inner">
+      <div>
+        <div class="badge">Trusted coaching • Since 2019</div>
+        <h1>Foundation to Future—Coaching for Classes <span aria-label="1st to 12th">1–12</span> & JEE • NEET • MHT‑CET</h1>
+        <p>Structured learning plans, experienced mentors, doubt‑clearing, and regular tests— Everything you need to climb higher.</p>
+        <div class="actions">
+          <a class="btn primary" href="#courses">Explore Courses</a>
+          <a class="btn ghost" href="#contact">Get Counselling</a>
+        </div>
+        <div class="stats" aria-label="Alpine highlights">
+          <div class="stat"><div class="num">150K+</div><div>Students Trained</div></div>
+          <div class="stat"><div class="num">120+</div><div>Top Ranks</div></div>
+          <div class="stat"><div class="num">95%</div><div>Board Results</div></div>
+        </div>
+      </div>
+      <img src="al14.png" alt="Students studying at Alpine" style="border-radius:18px;box-shadow:0 16px 38px var(--ring);border:1px solid rgba(255,255,255,.25)"/>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-title">Why Alpine?</h2>
+        <p class="sec-sub">Concept clarity • Discipline • Personal attention</p>
+      </div>
+      <div class="features" role="list">
+        <div class="feature" role="listitem">
+          <h4>Expert Faculty</h4>
+          <p>Mentors with IIT/Medical backgrounds and years of classroom experience.</p>
+        </div>
+        <div class="feature" role="listitem">
+          <h4>Structured Curriculum</h4>
+          <p>SMART plans aligned to Boards and competitive exam patterns.</p>
+        </div>
+        <div class="feature" role="listitem">
+          <h4>Doubt & Tests</h4>
+          <p>Daily doubt clinics with weekly tests and analytics.</p>
+        </div>
+        <div class="feature" role="listitem">
+          <h4>Parent Updates</h4>
+          <p>Monthly PTMs & app notifications to keep guardians in the loop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-title">Courses Offered</h2>
+        <p class="sec-sub">From strong foundations to top ranks</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Course categories">
+        <button class="tab active" role="tab" aria-selected="true" data-target="tab-foundation">Class 1–10</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="tab-11-12">Class 11–12</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="tab-exams">JEE • NEET • MHT‑CET</button>
+      </div>
+
+      <!-- Foundation -->
+      <div id="tab-foundation" class="tabpane">
+        <div class="grid">
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop" alt="Maths foundation"/>
+            <div class="body">
+
+              <span class="pill">Class 1-10</span>
+              <h3>Classes 1-10 </h3>
+              <p>Concept-first approach: arithmetic, algebra, geometry & problem solving.</p>
+
+            </div>
+            <div class="footer"><span>Weekly tests • Doubt desk</span><a class="enroll" href="#contact" data-course="Maths Foundation">Enquire</a></div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop" alt="Class 5-10"/>
+            <div class="body">
+              <span class="pill">Class 5-10</span>
+              <h3>Classes 5-10</h3>
+              <p>All subjesct will be covered in this class & All concepts will be done with practical. </p>
+            </div>
+            <div class="footer"><span>Lab demos • Worksheets</span><a class="enroll" href="#contact" data-course="Science Foundation">Enquire</a></div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop" alt="English foundation"/>
+            <div class="body">
+              <span class="pill">English & Skills</span>
+              <h3>Classes 1–10</h3>
+              <p>Grammar, comprehension, speaking & writing drills for boards.</p>
+            </div>
+            <div class="footer"><span>Olympiad add‑on</span><a class="enroll" href="#contact" data-course="English & Skills">Enquire</a></div>
+          </article>
+
+           
+        </div>
+      </div>
+
+      <!-- 11–12 -->
+      <div id="tab-11-12" class="tabpane hidden">
+        <div class="grid">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="PCM"/>
+            <div class="body">
+              <span class="pill">Class 11–12</span>
+              <h3>Physics • Chemistry • Maths</h3>
+              <p>Board-focused with numerical drills and past paper practice.</p>
+            </div>
+            <div class="footer"><span>NCERT + Boards</span><a class="enroll" href="#contact" data-course="XI-XII PCM">Enquire</a></div>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="PCB"/>
+            <div class="body">
+              <span class="pill">Class 11–12</span>
+              <h3>Physics • Chemistry • Biology</h3>
+              <p>Diagrams, derivations & application‑based questions for Boards.</p>
+            </div>
+            <div class="footer"><span>Numericals • Viva</span><a class="enroll" href="#contact" data-course="XI-XII PCB">Enquire</a></div>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200&auto=format&fit=crop" alt="Commerce"/>
+            <div class="body">
+              <span class="pill">Class 11–12</span>
+              <h3>Commerce Track</h3>
+              <p>Accounts, Economics, Business Studies with problem sets & tests.</p>
+            </div>
+            <div class="footer"><span>Case studies</span><a class="enroll" href="#contact" data-course="XI-XII Commerce">Enquire</a></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Exams -->
+      <div id="tab-exams" class="tabpane hidden">
+        <div class="grid">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="JEE"/>
+            <div class="body">
+              <span class="pill">JEE Main/Advanced</span>
+              <h3>2‑Year / 1‑Year / Crash</h3>
+              <p>Concept → Practice → Tests. DPPs, PYQs & All‑India mock series.</p>
+            </div>
+            <div class="footer"><span>Mentor guidance</span><a class="enroll" href="#contact" data-course="JEE">Enquire</a></div>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1581093588401-16ecff0f7b30?q=80&w=1200&auto=format&fit=crop" alt="NEET"/>
+            <div class="body">
+              <span class="pill">NEET UG</span>
+              <h3>Comprehensive Biology‑focused</h3>
+              <p>NCERT‑first, high‑yield notes, image‑based questions & grand tests.</p>
+            </div>
+            <div class="footer"><span>Bio‑charts</span><a class="enroll" href="#contact" data-course="NEET">Enquire</a></div>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop" alt="MHT-CET"/>
+            <div class="body">
+              <span class="pill">MHT‑CET</span>
+              <h3>PCM • PCB</h3>
+              <p>State‑board aligned with speed practice & chapter‑wise tests.</p>
+            </div>
+            <div class="footer"><span>Speed drills</span><a class="enroll" href="#contact" data-course="MHT-CET">Enquire</a></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACULTY -->
+  <section id="faculty">
+    <div class="container">
+      <div class="sec-head"><h2 class="sec-title">Our Faculty</h2><p class="sec-sub">Mentors who climb with you</p></div>
+      <div class="faculty">
+        <div class="mentor">
+          <img src="ak.png" alt="Physics mentor"/>
+          <h4>Prof. Akash Bhaskar</h4>
+          <span>CEO & Owner • Physics</span>
+        </div>
+        <div class="mentor">
+          <img src="trup.png" alt="Chemistry mentor"/>
+          <h4>Prof. Tripti Ingle</h4>
+          <span>Chemistry</span>
+        </div>
+        <div class="mentor">
+          <img src="rush.png" alt="Maths mentor"/>
+          <h4>Prof. Rushikesh Gawande</h4>
+          <span>Mathematics</span>
+        </div>
+        <div class="mentor">
+          <img src="kru.png" alt="Biology mentor"/>
+          <h4>Prof. Krupal Shirbhate</h4>
+          <span>Biology</span>  
+        </div>
+        <div class="mentor">
+          <img src="shr.png" alt="Biology mentor"/>
+          <h4>Prof. Shree Bhaskar</h4>
+          <span></span>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <section id="gallery">
+   <div class="container">
+     <div class="sec-head">
+       <h2 class="sec-title">Campus & Classroom</h2>
+       <p class="sec-sub">A glimpse of learning at Alpine</p>
+     </div>
+     <div class="gallery-slider">
+       <div class="gallery-track">
+         <img src="alp1.png" alt="Seminar"/>
+         <img src="alp2.png" alt="Classroom"/>
+         <img src="alp3.png" alt="Lab"/>
+         <img src="alp4.png" alt="Students"/>
+         <img src="prc.png" alt="practical"/>
+         <img src="al1.png" alt="Students"/>
+         <img src="al2.png" alt="Students"/>
+         <img src="al3.png" alt="Students"/>
+         <img src="al7.png" alt="Students"/>
+         <img src="al13.png" alt="Students"/>
+         <img src="al15.png" alt="Students"/>
+         <img src="al16.png" alt="Students"/>
+         <img src="al19.png" alt="Students"/>
+       </div>
+     </div>
+   </div>
+ </section>
+
+   <!-- Add below the Gallery section in title.html -->
+ <section id="study-material">
+   <div class="container">
+     <div class="sec-head">
+       <h2 class="sec-title">Study Material</h2>
+       <p class="sec-sub">Read and explore resources for every subject</p>
+     </div>
+     <div class="grid">
+       <article class="card">
+         <img src="maths-material.png" alt="Maths Material" />
+         <div class="body">
+           <span class="pill">Mathematics</span>
+           <h3>Maths Notes & PDFs</h3>
+           <p>Concept notes, solved examples, and practice sheets.</p>
+         </div>
+         <div class="footer">
+           <a class="enroll" href="maths.pdf" target="_blank">View Material</a>
+         </div>
+       </article>
+       <article class="card">
+         <img src="science-material.png" alt="Science Material" />
+         <div class="body">
+           <span class="pill">Science</span>
+           <h3>Science Notes & PDFs</h3>
+           <p>Diagrams, experiments, and revision notes.</p>
+         </div>
+         <div class="footer">
+           <a class="enroll" href="science.pdf" target="_blank">View Material</a>
+         </div>
+       </article>
+       <article class="card">
+         <img src="english-material.png" alt="English Material" />
+         <div class="body">
+           <span class="pill">English</span>
+           <h3>English Notes & PDFs</h3>
+           <p>Grammar, comprehension, and writing practice.</p>
+         </div>
+         <div class="footer">
+           <a class="enroll" href="english.pdf" target="_blank">View Material</a>
+         </div>
+       </article>
+       <!-- Add more subjects as needed -->
+     </div>
+   </div>
+ </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="sec-head"><h2 class="sec-title">What Students Say</h2><p class="sec-sub">Real stories, real results</p></div>
+      <div class="slider">
+        <div class="slide active">
+          <p class="quote">"Alpine's weekly tests and doubt sessions helped me jump from 72% to 92%."</p>
+          <strong>— Aryan Shah (Class 10)</strong>
+        </div>
+        <div class="slide">
+          <p class="quote">"The teaching and tricks made Board prep so much lighter."</p>
+          <strong>— Nigar Shaikh (class 12)</strong>
+        </div>
+        <div class="slide">
+          <p class="quote">"Concept clarity + personal mentorship is best. Thank you Alpine!"</p>
+          <strong>— Tanuj Naidu (classs 5)</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-head"><h2 class="sec-title">Get in Touch</h2><p class="sec-sub">Book a counselling call or request a demo class</p></div>
+      <form id="enquiryForm" novalidate>
+        <div>
+          <label for="name">Full Name</label>
+          <input id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" placeholder="10-digit number" pattern="^[0-9]{10}$" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label for="program">Interested In</label>
+          <select id="program" name="program" required>
+            <option value="">Select a course</option>
+            <option>Coaching (1-5)</option>
+            <option>Coaching (6-10)</option>  
+            <option>Maths Foundation (1-10)</option>
+            <option>Science Foundation (1–10)</option>
+            <option>English & Skills (1–10)</option>
+            <option>Personality Development</option>
+            <option>XI–XII PCM</option>
+            <option>XI–XII PCB</option>
+            <option>XI–XII Commerce</option>
+            <option>JEE</option>
+            <option>NEET</option>
+            <option>MHT‑CET</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="message" placeholder="Tell us your goals…"></textarea>
+        </div>
+        <button class="submit" type="submit">Submit Enquiry</button>
+        <p id="formMsg" class="full" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footcol">
+        <h5>Alpine Institute</h5>
+        <p>Address: Handewadi Chowk , Pune, Maharashtra, India</p>
+        <p>Email: alpineinstitute2@gmail.com • Phone: +91 8208764961</p>
+      </div>
+      <div class="footcol">
+        <h5>Quick Links</h5>
+        <p><a href="#courses">Courses</a></p>
+        <p><a href="#faculty">Faculty</a></p>
+        <p><a href="#contact">Enquiry</a></p>
+      </div>
+      <div class="footcol">
+        <h5>Social Media</h5>
+        <p><a href="#">Instagram</a></p>
+        <a href="https://instagram.com/theaplineinstitute" target="_blank" title="Instagram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="height: 40px;vertical-align:middle;">
+         </a>
+
+
+        <p><a href="#">Facebook</a></p>
+ <a href="https://facebook.com/yourfacebookpage" target="_blank" title="Facebook">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="height:35px;vertical-align:middle;">
+  </a>
+
+        <p><a href="#">YouTube</a></p>
+ <a href="https://youtube.com/@ALPINE_INSTITUTE" target="_blank" title="YouTube">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" style="height:28px;vertical-align:middle;">
+  </a>
+        <p><a href="#">WhatsApp</a></p>
+ <a href="https://wa.me/+918208764961" target="_blank" title="WhatsApp">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" style="height:28px;vertical-align:middle;">
+  </a>
+
+
+      </div>
+    </div>
+    <div class="copyright">© 2025 Alpine Institute. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn?.addEventListener('click',()=>{
+      const open = navLinks.classList.toggle('show');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Scrollspy for active links
+    const sections = ['home','about','courses','faculty','gallery','testimonials','contact'].map(id=>document.getElementById(id));
+    const links = [...document.querySelectorAll('.nav-links a')];
+    const spy = () => {
+      const y = window.scrollY + 90;
+      let current = sections[0].id;
+      sections.forEach(sec=>{ if (sec.offsetTop <= y) current = sec.id; });
+      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', spy); spy();
+
+    // Tabs
+    const tabButtons = document.querySelectorAll('.tab');
+    const panes = document.querySelectorAll('.tabpane');
+    tabButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      tabButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      panes.forEach(p=>p.classList.add('hidden'));
+      document.getElementById(btn.dataset.target).classList.remove('hidden');
+    }));
+
+    // Testimonials slider (auto-rotate)
+    const slides = document.querySelectorAll('.slide');
+    let idx = 0; setInterval(()=>{slides[idx].classList.remove('active'); idx=(idx+1)%slides.length; slides[idx].classList.add('active');}, 4200);
+
+    // Enquiry form (front-end validation & demo submit)
+    const form = document.getElementById('enquiryForm');
+    const msg = document.getElementById('formMsg');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!form.checkValidity()){
+        msg.textContent = 'Please fill all required details correctly.'; msg.style.color = '#b42318'; return;
+      }
+      const data = Object.fromEntries(new FormData(form).entries());
+      msg.textContent = `Thanks, ${data.name}! We will contact you shortly about "${data.program}".`;
+      msg.style.color = '#166534';
+      form.reset();
+    });
+
+    // Autofill course name when clicking Enquire buttons
+    document.querySelectorAll('.enroll').forEach(btn=>btn.addEventListener('click',(e)=>{
+      const course = e.currentTarget.getAttribute('data-course');
+      const select = document.getElementById('program');
+      [...select.options].forEach((op,i)=>{ if(op.text.includes(course)) select.selectedIndex=i; });
+    }));
+
+
+
+
+
+
+  </script>
+</body>
+</html>
